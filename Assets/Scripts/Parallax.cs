@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Parallax : MonoBehaviour
@@ -8,6 +9,7 @@ public class Parallax : MonoBehaviour
     public float x;
     private float[] parallaxScales;
     public float xScale;
+    public GameObject witch;
     void Start()
     {
         //creates different scales for the movement of the different layers
@@ -22,8 +24,17 @@ public class Parallax : MonoBehaviour
     void Update()
     {
         //for testing purposes
-        //x will have to be changed to be conencted to the player's x value
-        x += Time.deltaTime;
+        //x will have to be changed to be conencted to the player's x value. currently it moves on its own constantly
+        //x += Time.deltaTime;
+
+        //ties the background movement to the player's movement. 
+        if (witch.GetComponent<Animator>().GetBool("WalkRight"))
+        {
+            x += Time.deltaTime;
+        } else if (witch.GetComponent<Animator>().GetBool("WalkLeft"))
+        {
+            x -= Time.deltaTime;
+        }
 
         //causes the layers to be offset by the amount determined by their scales
         for (int i = 0;i < parallaxScales.Length;i++)
