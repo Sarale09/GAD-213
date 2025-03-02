@@ -5,6 +5,7 @@ using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool slowed = false;
     Animator animator;
     void Start()
     {
@@ -51,4 +52,25 @@ public class PlayerMovement : MonoBehaviour
         }
 
     }
+
+    private void OnCollisionEnter2D (Collision2D collision)
+    {
+        Debug.Log("enter");
+        if (collision.gameObject.tag == "Puddle")
+        {
+            slowed = true;
+            Debug.Log("Collision Working.");
+            animator.speed = 0.3f;
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Puddle")
+        {
+            slowed = false;
+            animator.speed = 1;
+        }
+    }
+
 }

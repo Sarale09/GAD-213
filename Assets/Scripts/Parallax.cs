@@ -12,6 +12,7 @@ public class Parallax : MonoBehaviour
     public GameObject witch;
     void Start()
     {
+        xScale = 0.025f;
         //creates different scales for the movement of the different layers
         parallaxScales = new float[BgMaterials.Length];
 
@@ -23,6 +24,16 @@ public class Parallax : MonoBehaviour
 
     void Update()
     {
+        //Changes the speed at which the background is moving when the player is slowed down
+        if (witch.GetComponent<PlayerMovement>().slowed)
+        {
+            xScale = 0.005f;
+        } else
+        {
+            xScale = 0.025f;
+        }
+
+
         //for testing purposes
         //x will have to be changed to be conencted to the player's x value. currently it moves on its own constantly
         //x += Time.deltaTime;
@@ -35,6 +46,7 @@ public class Parallax : MonoBehaviour
         {
             x -= Time.deltaTime;
         }
+
 
         //causes the layers to be offset by the amount determined by their scales
         for (int i = 0;i < parallaxScales.Length;i++)
