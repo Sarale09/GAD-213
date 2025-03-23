@@ -25,7 +25,7 @@ public class Parallax : MonoBehaviour
     void Update()
     {
         //Changes the speed at which the background is moving when the player is slowed down
-        if (witch.GetComponent<PlayerMovement>().slowed)
+        if (witch.GetComponent<PlayerMovementWitch>().slowed)
         {
             paralaxSpeed = 0.005f;
         } else

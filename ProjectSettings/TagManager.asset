@@ -42,3 +42,24 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Sky
+    uniqueID: 2779355635
+    locked: 0
+  - name: Ground Path
+    uniqueID: 711302667
+    locked: 0
+  - name: Back Trees
+    uniqueID: 1811088345
+    locked: 0
+  - name: Middle Trees
+    uniqueID: 1630323099
+    locked: 0
+  - name: Front Trees
+    uniqueID: 3128908051
+    locked: 0
+  - name: Environment Back
+    uniqueID: 2548130711
+    locked: 0
+  - name: Player
+    uniqueID: 2372025545
+    locked: 0
