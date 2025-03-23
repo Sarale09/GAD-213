@@ -6,13 +6,13 @@ using UnityEngine;
 public class Parallax : MonoBehaviour
 {
     [SerializeField] private Material[] BgMaterials;
-    public float x;
+    public float direction;
     private float[] parallaxScales;
-    public float xScale;
+    public float paralaxSpeed;
     public GameObject witch;
     void Start()
     {
-        xScale = 0.025f;
+        paralaxSpeed = 0.025f;
         //creates different scales for the movement of the different layers
         parallaxScales = new float[BgMaterials.Length];
 
@@ -27,10 +27,10 @@ public class Parallax : MonoBehaviour
         //Changes the speed at which the background is moving when the player is slowed down
         if (witch.GetComponent<PlayerMovement>().slowed)
         {
-            xScale = 0.005f;
+            paralaxSpeed = 0.005f;
         } else
         {
-            xScale = 0.025f;
+            paralaxSpeed = 0.025f;
         }
 
 
@@ -41,17 +41,17 @@ public class Parallax : MonoBehaviour
         //ties the background movement to the player's movement. 
         if (witch.GetComponent<Animator>().GetBool("WalkRight"))
         {
-            x += Time.deltaTime;
+            direction += Time.deltaTime;
         } else if (witch.GetComponent<Animator>().GetBool("WalkLeft"))
         {
-            x -= Time.deltaTime;
+            direction -= Time.deltaTime;
         }
 
 
         //causes the layers to be offset by the amount determined by their scales
         for (int i = 0;i < parallaxScales.Length;i++)
         {
-            float parallax = parallaxScales[i] * x * xScale;
+            float parallax = parallaxScales[i] * direction * paralaxSpeed;
 
             Vector2 backgroundTargetPos = new Vector2(parallax, BgMaterials[i].mainTextureOffset.y);
 
