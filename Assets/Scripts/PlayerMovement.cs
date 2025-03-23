@@ -19,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        Debug.Log(horizontalInput);
+        //Debug.Log(horizontalInput);
 
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
 
