@@ -1,11 +1,13 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
     float horizontalInput;
-    float moveSpeed = 3f;
+    float moveSpeed = 2.5f;
     Rigidbody2D rb;
     Animator animator;
+    public GameObject puddle;
 
     void Start()
     {
@@ -22,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = new Vector2(horizontalInput * moveSpeed, rb.velocity.y);
 
         //play animations corresponding to the direction
-
         if (horizontalInput > 0.5)
         {
             animator.SetBool("WalkRight", true);
@@ -46,6 +47,17 @@ public class PlayerMovement : MonoBehaviour
             //Debug.Log("Down");
             transform.Translate(new Vector3(0, -1, 0) * Time.deltaTime);
             transform.localScale += new Vector3(0.3f, 0.3f, 0.3f) * Time.deltaTime;
+        }
+
+        //slow down if in puddle
+        if (puddle.GetComponent<PuddleTrigger>().onPuddle)
+        {
+            moveSpeed = 1.5f;
+            animator.speed = 0.5f;
+        } else 
+        { 
+            moveSpeed = 2.5f;
+            animator.speed = 1;
         }
     }
 }

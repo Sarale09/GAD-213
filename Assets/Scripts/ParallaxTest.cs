@@ -6,6 +6,7 @@ public class ParallaxTest : MonoBehaviour
 {
     private float startPos, length;
     public GameObject cam;
+    public GameObject puddle;
     public float parallaxEffect;
     // Start is called before the first frame update
     void Start()
