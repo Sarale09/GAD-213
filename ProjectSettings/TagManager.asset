@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Puddle
+  - Interactable
   layers:
   - Default
   - TransparentFX
@@ -59,6 +60,9 @@ TagManager:
     locked: 0
   - name: Environment Back
     uniqueID: 2548130711
+    locked: 0
+  - name: Interactable
+    uniqueID: 4084593593
     locked: 0
   - name: Player
     uniqueID: 2372025545
