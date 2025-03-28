@@ -7,10 +7,12 @@ using UnityEngine.UIElements;
 public class InputHandler : MonoBehaviour
 {
     private Camera cam;
+    public Inventory inventory;
 
     private void Awake()
     {
         cam = Camera.main;
+        inventory = FindObjectOfType<Inventory>();
     }
 
    public void OnClick(InputAction.CallbackContext context)
@@ -21,5 +23,7 @@ public class InputHandler : MonoBehaviour
         if (!rayHit.collider || rayHit.collider.gameObject.tag != "Interactable") return;
 
         Debug.Log(rayHit.collider.gameObject.name);
+        inventory.berryCounter += 1;
+        Destroy (rayHit.collider.gameObject);
     }
 }
