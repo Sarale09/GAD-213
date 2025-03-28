@@ -22,8 +22,12 @@ public class InputHandler : MonoBehaviour
         var rayHit = Physics2D.GetRayIntersection(cam.ScreenPointToRay(Mouse.current.position.ReadValue()));
         if (!rayHit.collider || rayHit.collider.gameObject.tag != "Interactable") return;
 
-        Debug.Log(rayHit.collider.gameObject.name);
-        inventory.berryCounter += 1;
-        Destroy (rayHit.collider.gameObject);
+        //Debug.Log(rayHit.collider.gameObject.name);
+        if (rayHit.collider.gameObject.name.Contains("Berry"))
+        {
+            inventory.berryCounter += 1;
+            Destroy(rayHit.collider.gameObject);
+        }
+        
     }
 }
