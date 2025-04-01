@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
 
     public GameObject overworld;
     public GameObject brew;
+    public GameObject inputHandler;
+    public GameObject berryPrefab;
+
+    public Vector3 spawnPoint;
 
     public TextMeshProUGUI berryCountText;
     // Start is called before the first frame update
@@ -30,8 +34,9 @@ public class GameManager : MonoBehaviour
         overworldView = false;
         overworld.SetActive(false);
         brewView = true;
-        berryCountText.text = GetComponent<Inventory>().berryCounter.ToString();
+        countersUpdater();
         brew.SetActive(true);
+        inputHandler.GetComponent<InputHandler>().cam = Camera.main;
     }
     public void OverworldViewButton()
     {
@@ -39,9 +44,17 @@ public class GameManager : MonoBehaviour
         overworld.SetActive(true);
         brewView = false;
         brew.SetActive(false);
+        inputHandler.GetComponent<InputHandler>().cam = Camera.main;
     }
     public void countersUpdater()
     {
+        berryCountText.text = GetComponent<Inventory>().berryCounter.ToString();
+    }
 
+    public void addToCauldron()
+    {
+        spawnPoint = brew.transform.position + new Vector3(Random.Range(1.32f, 7.35f), Random.Range(-2.09f, 0.1f), 1);
+        GameObject NewInCauldron = Instantiate(berryPrefab, spawnPoint, Quaternion.identity, brew.transform);
+        NewInCauldron.transform.localScale = Vector3.one;
     }
 }

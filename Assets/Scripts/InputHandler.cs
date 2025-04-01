@@ -6,8 +6,9 @@ using UnityEngine.UIElements;
 
 public class InputHandler : MonoBehaviour
 {
-    private Camera cam;
+    public Camera cam;
     public Inventory inventory;
+    public GameManager manager;
 
     private void Awake()
     {
@@ -27,13 +28,24 @@ public class InputHandler : MonoBehaviour
         //interactions when picking up an item in the overworld
         if (rayHit.collider.gameObject.tag == "PickUp")
         {
+            //if statement created to allow for the expansion of various ingredients
             if (rayHit.collider.gameObject.name.Contains("Berry"))
             {
                 inventory.berryCounter += 1;
+                manager.GetComponent<GameManager>().countersUpdater();
                 Destroy(rayHit.collider.gameObject);
             }
         }
-        
-        
+
+        //interactions when usign ingredients in brew view
+        if (rayHit.collider.gameObject.tag == "Ingredient" && inventory.berryCounter > 0)
+        {
+            inventory.berryCounter -= 1;
+            manager.GetComponent<GameManager>().countersUpdater();
+            manager.GetComponent<GameManager>().addToCauldron();
+        }
+
+
+
     }
 }
