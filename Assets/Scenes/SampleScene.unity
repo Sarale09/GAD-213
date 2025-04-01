@@ -940,11 +940,11 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15999937, y: -2.4852362, z: 0.17290306}
+  m_LocalPosition: {x: 6.8600006, y: 2.79, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 950182373}
+  m_Father: {fileID: 975084753}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &600992020
 GameObject:
@@ -1042,8 +1042,8 @@ GameObject:
   - component: {fileID: 614784779}
   - component: {fileID: 614784778}
   m_Layer: 0
-  m_Name: Circle
-  m_TagString: Interactable
+  m_Name: Berry
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1077,7 +1077,7 @@ CircleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1517,7 +1517,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &756903232
 Transform:
   m_ObjectHideFlags: 0
@@ -1720,7 +1720,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &950182373
 Transform:
   m_ObjectHideFlags: 0
@@ -1736,7 +1736,6 @@ Transform:
   m_Children:
   - {fileID: 327883665}
   - {fileID: 975084753}
-  - {fileID: 519420032}
   - {fileID: 1123863473}
   - {fileID: 150100276}
   - {fileID: 1483286163}
@@ -1774,10 +1773,11 @@ Transform:
   m_GameObject: {fileID: 975084752}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.762821, y: -5.275236, z: 10.172903}
+  m_LocalPosition: {x: -7.02, y: -5.275236, z: 10.172903}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 519420032}
   m_Father: {fileID: 950182373}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &975084754
@@ -1850,7 +1850,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -210373703
   m_SortingLayer: 7
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 5f619b1c6af46134f938ac5a0c3d57f7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

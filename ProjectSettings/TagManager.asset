@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Puddle
   - Interactable
+  - PickUp
   layers:
   - Default
   - TransparentFX

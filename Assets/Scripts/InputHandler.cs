@@ -20,14 +20,20 @@ public class InputHandler : MonoBehaviour
         if (!context.started) return;
 
         var rayHit = Physics2D.GetRayIntersection(cam.ScreenPointToRay(Mouse.current.position.ReadValue()));
-        if (!rayHit.collider || rayHit.collider.gameObject.tag != "Interactable") return;
+        if (!rayHit.collider) return;
 
         //Debug.Log(rayHit.collider.gameObject.name);
-        if (rayHit.collider.gameObject.name.Contains("Berry"))
+
+        //interactions when picking up an item in the overworld
+        if (rayHit.collider.gameObject.tag == "PickUp")
         {
-            inventory.berryCounter += 1;
-            Destroy(rayHit.collider.gameObject);
+            if (rayHit.collider.gameObject.name.Contains("Berry"))
+            {
+                inventory.berryCounter += 1;
+                Destroy(rayHit.collider.gameObject);
+            }
         }
+        
         
     }
 }
