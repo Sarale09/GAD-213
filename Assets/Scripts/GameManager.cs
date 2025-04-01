@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject overworld;
     public GameObject brew;
+
+    public TextMeshProUGUI berryCountText;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +30,7 @@ public class GameManager : MonoBehaviour
         overworldView = false;
         overworld.SetActive(false);
         brewView = true;
+        berryCountText.text = GetComponent<Inventory>().berryCounter.ToString();
         brew.SetActive(true);
     }
     public void OverworldViewButton()
@@ -34,5 +39,9 @@ public class GameManager : MonoBehaviour
         overworld.SetActive(true);
         brewView = false;
         brew.SetActive(false);
+    }
+    public void countersUpdater()
+    {
+
     }
 }
