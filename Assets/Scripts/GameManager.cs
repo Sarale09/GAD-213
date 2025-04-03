@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public GameObject berryPrefab;
     public GameObject berryIngredient;
 
+    public List<GameObject> inCauldron = new List<GameObject>();
+
     public Vector3 spawnPoint;
 
     public TextMeshProUGUI berryCountText;
@@ -25,11 +27,6 @@ public class GameManager : MonoBehaviour
         brewView = false;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void BrewViewButton()
     {
         overworldView = false;
@@ -67,8 +64,13 @@ public class GameManager : MonoBehaviour
 
     public void addToCauldron()
     {
+        //spawns the selected ingredient at a random position inside the cauldron
         spawnPoint = brew.transform.position + new Vector3(Random.Range(1.32f, 7.35f), Random.Range(-2.09f, 0.1f), 1);
         GameObject NewInCauldron = Instantiate(berryPrefab, spawnPoint, Quaternion.identity, brew.transform);
         NewInCauldron.transform.localScale = Vector3.one;
+
+        //adds the object to the in cauldron list to keep tract of what has been selected
+        inCauldron.Add(NewInCauldron);
+        //Debug.Log(inCauldron.Count);
     }
 }

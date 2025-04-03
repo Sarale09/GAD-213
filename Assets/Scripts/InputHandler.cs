@@ -34,11 +34,17 @@ public class InputHandler : MonoBehaviour
                 inventory.berryCounter += 1;
                 manager.GetComponent<GameManager>().countersUpdater();
                 Destroy(rayHit.collider.gameObject);
+                //When removing an item from the cauldron 
+                if (manager.brewView)
+                {
+                    manager.inCauldron.Remove(rayHit.collider.gameObject);
+                    //Debug.Log(manager.inCauldron.Count);
+                }
             }
         }
 
         //interactions when usign ingredients in brew view
-        if (rayHit.collider.gameObject.tag == "Ingredient" && inventory.berryCounter > 0)
+        if (rayHit.collider.gameObject.tag == "Ingredient" && inventory.berryCounter > 0 && manager.inCauldron.Count < 3)
         {
             inventory.berryCounter -= 1;
             manager.GetComponent<GameManager>().countersUpdater();
