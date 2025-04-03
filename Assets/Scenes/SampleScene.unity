@@ -171,6 +171,7 @@ MonoBehaviour:
   brew: {fileID: 756903231}
   inputHandler: {fileID: 1170232161}
   berryPrefab: {fileID: 8885568675653748185, guid: d8d2e39d12c3eef49856db616c7cc96c, type: 3}
+  berryIngredient: {fileID: 745767681}
   spawnPoint: {x: 0, y: 0, z: 0}
   berryCountText: {fileID: 1322271440}
 --- !u!4 &37244611

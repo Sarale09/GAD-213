@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public GameObject brew;
     public GameObject inputHandler;
     public GameObject berryPrefab;
+    public GameObject berryIngredient;
 
     public Vector3 spawnPoint;
 
@@ -49,6 +50,19 @@ public class GameManager : MonoBehaviour
     public void countersUpdater()
     {
         berryCountText.text = GetComponent<Inventory>().berryCounter.ToString();
+        
+        if (GetComponent<Inventory>().berryCounter == 0)
+        {
+            Color opacityMod = berryIngredient.GetComponent<SpriteRenderer>().color;
+            opacityMod.a = 0.5f;
+            berryIngredient.GetComponent<SpriteRenderer>().color = opacityMod;
+        }
+        if (GetComponent<Inventory>().berryCounter > 0)
+        {
+            Color opacityMod = berryIngredient.GetComponent<SpriteRenderer>().color;
+            opacityMod.a = 1f;
+            berryIngredient.GetComponent<SpriteRenderer>().color = opacityMod;
+        }
     }
 
     public void addToCauldron()
