@@ -38,6 +38,7 @@ public class InputHandler : MonoBehaviour
                 if (manager.brewView)
                 {
                     manager.inCauldron.Remove(rayHit.collider.gameObject);
+                    manager.brewButton.SetActive(false);
                     //Debug.Log(manager.inCauldron.Count);
                 }
             }

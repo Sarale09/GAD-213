@@ -13,18 +13,30 @@ public class GameManager : MonoBehaviour
     public GameObject brew;
     public GameObject inputHandler;
     public GameObject berryPrefab;
+    public GameObject brewButton;
+    public GameObject potionViewButton;
+    public GameObject ingredientViewButton;
+    public GameObject ingredientView;
+    public GameObject potionView;
+
     public GameObject berryIngredient;
+    public GameObject berryPotion;
+
+
+    public Inventory inventory;
 
     public List<GameObject> inCauldron = new List<GameObject>();
 
     public Vector3 spawnPoint;
 
     public TextMeshProUGUI berryCountText;
+    public TextMeshProUGUI berryPotionText;
     // Start is called before the first frame update
     void Start()
     {
         overworldView = true;
         brewView = false;
+        inventory = GetComponent<Inventory>();
     }
 
     public void BrewViewButton()
@@ -46,20 +58,8 @@ public class GameManager : MonoBehaviour
     }
     public void countersUpdater()
     {
-        berryCountText.text = GetComponent<Inventory>().berryCounter.ToString();
-        
-        if (GetComponent<Inventory>().berryCounter == 0)
-        {
-            Color opacityMod = berryIngredient.GetComponent<SpriteRenderer>().color;
-            opacityMod.a = 0.5f;
-            berryIngredient.GetComponent<SpriteRenderer>().color = opacityMod;
-        }
-        if (GetComponent<Inventory>().berryCounter > 0)
-        {
-            Color opacityMod = berryIngredient.GetComponent<SpriteRenderer>().color;
-            opacityMod.a = 1f;
-            berryIngredient.GetComponent<SpriteRenderer>().color = opacityMod;
-        }
+        UpdateCounter("berries", berryCountText, berryIngredient);
+        UpdateCounter("berry potions", berryPotionText, berryPotion);
     }
 
     public void addToCauldron()
@@ -72,5 +72,81 @@ public class GameManager : MonoBehaviour
         //adds the object to the in cauldron list to keep tract of what has been selected
         inCauldron.Add(NewInCauldron);
         //Debug.Log(inCauldron.Count);
+
+        if (inCauldron.Count == 3)
+        {
+            brewButton.SetActive(true);
+        }
+    }
+
+    public void BrewPotionButton()
+    {
+        List<GameObject> berriesInCauldron = inCauldron.FindAll(x => x.name.ContainsInsensitive("berry"));
+        if (berriesInCauldron.Count == 3)
+        {
+            //destroy all objects in the cauldron
+            for (int i = 0; i < 3; i++)
+            {
+                Destroy(berriesInCauldron[i]);
+                //Debug.Log(inCauldron.Count);
+            }
+
+            //clear the list
+            inCauldron.Clear();
+            //Debug.Log(inCauldron.Count);
+
+            //add potion to inventory
+            inventory.berryPotion++;
+
+            //hide brew button
+            brewButton.SetActive(false);
+
+            //update counters
+            countersUpdater();
+        }
+    }
+
+    private void UpdateCounter(string item, TextMeshProUGUI itemText, GameObject itemSprite)
+    {
+        int invCheck = 0;
+        if (item == "berries")
+        {
+            invCheck = inventory.berryCounter;
+        } else if (item == "berry potions")
+        {
+            invCheck = inventory.berryPotion;
+        }
+
+        itemText.text = invCheck.ToString();
+
+
+        if (invCheck == 0)
+        {
+            Color opacityMod = itemSprite.GetComponent<SpriteRenderer>().color;
+            opacityMod.a = 0.5f;
+            itemSprite.GetComponent<SpriteRenderer>().color = opacityMod;
+        }
+        if (invCheck > 0)
+        {
+            Color opacityMod = itemSprite.GetComponent<SpriteRenderer>().color;
+            opacityMod.a = 1f;
+            itemSprite.GetComponent<SpriteRenderer>().color = opacityMod;
+        }
+
+    }
+
+    public void PotionViewButton() 
+    {
+        berryPotion.SetActive(true);
+        potionView.SetActive(true);
+        berryIngredient.SetActive(false);
+        ingredientView.SetActive(false);
+    }
+    public void IngredientViewButton()
+    {
+        berryPotion.SetActive(false);
+        potionView.SetActive(false);
+        berryIngredient.SetActive(true);
+        ingredientView.SetActive(true);
     }
 }
