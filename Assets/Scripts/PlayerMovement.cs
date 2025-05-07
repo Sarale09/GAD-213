@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody2D rb;
     Animator animator;
     public GameObject puddle;
+    public bool isWalking = false;
 
     void Start()
     {
@@ -26,12 +27,15 @@ public class PlayerMovement : MonoBehaviour
         //play animations corresponding to the direction
         if (horizontalInput > 0.5)
         {
+            isWalking = true;
             animator.SetBool("WalkRight", true);
         } else if (horizontalInput < -0.5)
         {
+            isWalking = true;
             animator.SetBool("WalkLeft", true);
         } else
         {
+            isWalking = false;
             animator.SetBool("WalkLeft", false);
             animator.SetBool("WalkRight", false);
         }
