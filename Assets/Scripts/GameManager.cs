@@ -8,8 +8,10 @@ public class GameManager : MonoBehaviour
 {
     public bool overworldView;
     public bool brewView;
+    public bool lost = false;
 
     public GameObject overworld;
+    public GameObject lossScreen;
     public GameObject brew;
     public GameObject inputHandler;
     public GameObject berryPrefab;
@@ -22,6 +24,7 @@ public class GameManager : MonoBehaviour
     public GameObject berryIngredient;
     public GameObject berryPotion;
     public GameObject overworldPotion;
+    public GameObject usePotionUI;
 
     public Inventory inventory;
 
@@ -39,6 +42,15 @@ public class GameManager : MonoBehaviour
         brewView = false;
         inventory = GetComponent<Inventory>();
         countersUpdater();
+    }
+
+    private void Update()
+    {
+        if (lost)
+        {
+            overworld.SetActive(false);
+            lossScreen.SetActive(true);
+        }
     }
 
     public void BrewViewButton()
@@ -128,12 +140,14 @@ public class GameManager : MonoBehaviour
             Color opacityMod = itemSprite.GetComponent<SpriteRenderer>().color;
             opacityMod.a = 0.5f;
             itemSprite.GetComponent<SpriteRenderer>().color = opacityMod;
+            usePotionUI.SetActive(false);
         }
         if (invCheck > 0)
         {
             Color opacityMod = itemSprite.GetComponent<SpriteRenderer>().color;
             opacityMod.a = 1f;
             itemSprite.GetComponent<SpriteRenderer>().color = opacityMod;
+            usePotionUI.SetActive(true);
         }
 
     }

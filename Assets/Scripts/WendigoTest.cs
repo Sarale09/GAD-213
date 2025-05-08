@@ -11,6 +11,7 @@ public class WendigoTest : MonoBehaviour
     private Animator animator;
     private SpriteRenderer rend;
     public Vector3 targetPos = new Vector3();  
+    public GameManager manager;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,15 @@ public class WendigoTest : MonoBehaviour
         targetPos = new Vector3 (Random.Range(-1.7f, 15.4f), 1.72f, transform.localPosition.z);
         transform.localPosition = targetPos;
         transform.localScale = new Vector3 (0.5f, 0.5f, 0.5f);
+    }
+
+    private void OnEnable()
+    {
+        //appears at a random position in the back & resets movements
+        targetPos = new Vector3(Random.Range(-1.7f, 15.4f), 1.72f, transform.localPosition.z);
+        transform.localPosition = targetPos;
+        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        movements = 0;
     }
 
     // Update is called once per frame
@@ -53,10 +63,6 @@ public class WendigoTest : MonoBehaviour
 
             StartCoroutine(MovementPause());
 
-            //if (movements == 10)
-            //{
-            //    rend.sortingLayerName = "Middle Trees";
-            //}
         }
 
        
@@ -73,6 +79,19 @@ public class WendigoTest : MonoBehaviour
             else if (targetPos.x < transform.localPosition.x)
             {
                 animator.SetBool("WalkingLeft", true);
+            }
+        }
+
+        if (hunting)
+        {
+            //when hunting the wendigo will move towards the player
+            animator.SetBool("WalkingLeft", true);
+            targetPos = new Vector3 (0, transform.localPosition.y, transform.localPosition.z);
+            transform.localPosition = Vector3.MoveTowards(transform.localPosition, targetPos, moveSpeed * Time.deltaTime);
+            if (transform.localPosition == targetPos)
+            {
+                //Display loss screen
+                manager.GetComponent<GameManager>().lost = true;
             }
         }
 
