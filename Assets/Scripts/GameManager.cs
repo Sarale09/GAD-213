@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     public GameObject berryIngredient;
     public GameObject berryPotion;
-
+    public GameObject overworldPotion;
 
     public Inventory inventory;
 
@@ -31,12 +31,14 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI berryCountText;
     public TextMeshProUGUI berryPotionText;
+    public TextMeshProUGUI overworldPotionText;
     // Start is called before the first frame update
     void Start()
     {
         overworldView = true;
         brewView = false;
         inventory = GetComponent<Inventory>();
+        countersUpdater();
     }
 
     public void BrewViewButton()
@@ -60,6 +62,7 @@ public class GameManager : MonoBehaviour
     {
         UpdateCounter("berries", berryCountText, berryIngredient);
         UpdateCounter("berry potions", berryPotionText, berryPotion);
+        UpdateCounter("berry potions", overworldPotionText, overworldPotion);
     }
 
     public void addToCauldron()
