@@ -26,11 +26,7 @@ public class WendigoTest : MonoBehaviour
 
     private void OnEnable()
     {
-        //appears at a random position in the back & resets movements
-        targetPos = new Vector3(Random.Range(-1.7f, 15.4f), 1.72f, transform.localPosition.z);
-        transform.localPosition = targetPos;
-        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
-        movements = 0;
+        isPaused = false;
     }
 
     // Update is called once per frame

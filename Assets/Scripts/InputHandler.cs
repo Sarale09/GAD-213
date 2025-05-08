@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
@@ -9,6 +10,7 @@ public class InputHandler : MonoBehaviour
     public Camera cam;
     public Inventory inventory;
     public GameManager manager;
+    public GameObject Wendigo;
 
     private void Awake()
     {
@@ -16,7 +18,17 @@ public class InputHandler : MonoBehaviour
         inventory = FindObjectOfType<Inventory>();
     }
 
-   public void OnClick(InputAction.CallbackContext context)
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && inventory.berryPotion > 0 && manager.GetComponent<GameManager>().overworldView == true)
+        {
+            inventory.berryPotion -= 1;
+            manager.GetComponent<GameManager>().countersUpdater();
+            Wendigo.SetActive(false);
+        }
+    }
+
+    public void OnClick(InputAction.CallbackContext context)
     {
         if (!context.started) return;
 

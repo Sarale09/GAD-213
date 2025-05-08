@@ -4275,6 +4275,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   inventory: {fileID: 0}
   manager: {fileID: 37244610}
+  Wendigo: {fileID: 382036233}
 --- !u!114 &1170232164
 MonoBehaviour:
   m_ObjectHideFlags: 0
